@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi primer ejemplo</title>
+    <style>
+        p {
+            background: rgba(100,100,200,0.3);
+            border: 2px solid rgba(100,100,200,0.3);
+            border-radius: 10px;
+            color:rgb(0,0,200);
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 3rem;
+            letter-spacing: 1px;
+            padding: 3px 10px;
+            text-transform: capitalize;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+   <p>Jugador 1: Kevin</p> 
+
+   <button id="buttonColor" onclick="cambiaColor()">Haz me clic</button>
+
+
+   <script src="js/ejemplo01.js"></script>
+   <script>
+       const parra = document.querySelector('p');
+
+        parra.addEventListener('click', updateName);
+        
+        function updateName() {
+            const name = prompt('Ingresa tu nombre');
+            parra.textContent = `Jugador 1: ${name}`;
+        }
+    </script>
+</body>
+</html>
