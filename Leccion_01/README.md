@@ -1,9 +1,11 @@
-# Crear un proyecto Login con Express y MongoDB
+# Lección 01 Introducción a JavaScript
 
-<p>Instalación</p>
-<ul>
-  <li> Paso 1 Descargar repositorio mediante el comando <strong> git clone https://github.com/gbarron2014/JavaScript-Express.git </strong> </li>
-  <li> Paso 2 Cambiarse a carpeta que se acaba de descargar. </li>
-  <li> Paso 3 Ejecutar el comando <b>npm install</b> </li>
-  <li>Paso 4 Ejecutar el comando  <b>SET DEBUG=login:* & nodemon devstart </b> </li>
-</ul>
+#Instrucciones
+<ol>
+  <li>Descarga carpeta de Lección 01</li>
+  <li>Una vez descargada, descomprimir carpeta</li>
+  <li>Ejecutar el archivo <b>Ejemplo01.html</b> para observar el resultado</li>
+
+</ol>
+
+<img src="https://user-images.githubusercontent.com/8560750/154545033-e699f725-6578-4661-825e-6dadab2d6bde.png">
