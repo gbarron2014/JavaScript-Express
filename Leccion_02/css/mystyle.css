@@ -1,0 +1,58 @@
+body {
+    background: #d7e6fa;
+}
+.header {
+    border-top: 10px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: xx-large;
+}
+.navbar {
+    border-radius: 5px;
+    background:#081861;
+}
+
+.nav-link, .navbar-brand {
+    color:white;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.contenido {
+    background: #fff;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+.menu {
+    border-right: 1px solid black;
+}
+
+.video {
+    border-bottom: 1px solid black;
+    min-height: 90%;
+}
+
+.sidenav {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    background-color: #111;
+    overflow-x: hidden;
+  }
+  
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
