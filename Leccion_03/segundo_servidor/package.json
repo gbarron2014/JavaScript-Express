@@ -1,0 +1,15 @@
+{
+  "name": "segundo_servidor",
+  "version": "1.0.0",
+  "description": "Segundo Servidor",
+  "main": "main.js",
+  "scripts": {
+    "start":"nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Barrón",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "simple_servidor",
+  "version": "1.0.0",
+  "description": "Simple Servidor",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Simple",
+    "servior"
+  ],
+  "author": "Gabriel Barrón",
+  "license": "ISC",
+  "dependencies": {
+    "http-status-codes": "^2.2.0",
+    "nodemon": "^2.0.15"
+  }
+}
