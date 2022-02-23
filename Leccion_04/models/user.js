@@ -1,21 +1,32 @@
 var mongoose = require('mongoose');
-
-var Schema = mongoose.Schema;
-
-var UserSchema = new Schema(
-  {
-    username: {type: String, required: true, maxLength: 50, minlength:3},
-    password: {type: String, required: true, maxLength: 100, minlength:8},
-    email: {type: String},
-  }
+const Schema = mongoose.Schema;
+const UserSchema = new Schema(
+    {
+        username: { 
+            type:String,
+            trim:true,
+            lowercase:true,
+            required: 'El Usuario es requerido',
+            minlength:8,
+            maxlength:20},
+        password: {
+            type:String,
+            trim:true,
+            lowercase:true,
+            required:'Contraseña es requerida',
+            minlength:8,
+            maxlength:15},
+        email:{
+            type:String,
+            trim:true,
+            required:'El Email es requerido'
+        }
+    }
 );
 
-// URL Virtual
-UserSchema
-.virtual('url')
-.get(function () {
-  return '/catalog/user/' + this._id;
+UserSchema.virtual('url')
+.get(function(){
+    return '/catalog/user/' + this._id;
 });
 
-//Export model
 module.exports = mongoose.model('User', UserSchema);

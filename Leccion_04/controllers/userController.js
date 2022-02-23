@@ -1,40 +1,38 @@
 var User = require('../models/user');
-const { body,validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
-
-//Mostrar formulario de Login
 exports.user_login = function(req, res) {
-    res.render('login', { title: 'Ingresando al sistema' });
+    res.render('login', {title: 'Ingresando al sistema'});
+}
+
+exports.user_home = (req, res) => {
+    res.render('home', {title: 'Bienvenido a Casa'});
 };
 
-//Dirige hacia la pantalla HOME
-exports.user_home = function (req, res) {
-    res.render('Bienvenido a Home');
-};
+exports.user_verify = (req, res) => {
+    let usuario = req.body.username;
+    let pass = req.body.password;
+    console.log('Usuario ' + usuario + ' Password: ' + pass);
 
-//Verificar credenciales de usuario
-exports.user_login_verify = function(req, res, next) {
-    let username = req.body.username;
-	let password = req.body.password;
-
-    if (username && password) {
-        console.log('Username ' + username);
-        console.log('Password ' + password);
-
-        User.find({'username': username, 'password':password}, function(err, results) {
-            if (err) { return next(err); }
+    if (usuario && pass) {
+        User.find({'username': usuario, 'password': pass}, function(error, results) {
+            if (error){
+                let message = 'Hubo un error de conexion a Mongo';
+                res.render('login', {title:'Ingresar Sistema', message:message});
+            }
 
             if (results.length > 0) {
-                console.log('Hubo resultados');
-                res.render('index', { title: 'Bienvenido ' + username } );
+                res.render('index', {title:'Bienvenido ' + usuario});
             } else {
-                res.render('login', {title: 'Ingresar al sistema', message:'Datos Incorrectos'});
+                let mensaje = 'Usuario o contraseña incorrecto';
+                let titulo = 'Bienvenido ' + usuario;
+                res.render('login', {title:titulo, message: mensaje });
 
             }
         });
-
     } else {
-        res.send('por favor ingresa Usuario and Contraseña!');
-		res.end();
+        let message = 'Usuario o Contraseña vacío';
+        res.render('login', {title:'Ingresar Sistema', message: message});
     }
+  
 };

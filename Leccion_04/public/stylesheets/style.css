@@ -26,6 +26,7 @@ body {
   padding-top: 20px;
 }
 .login form label {
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +39,8 @@ body {
   width: 310px;
   height: 50px;
   border: 1px solid #dee0e4;
+  border-radius: 10px;
+  margin-left: 5px;
   margin-bottom: 20px;
   padding: 0 15px;
 }
@@ -56,3 +59,4 @@ body {
 background-color: #2868c7;
   transition: background-color 0.2s;
 }
+
