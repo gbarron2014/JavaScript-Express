@@ -35,7 +35,7 @@ _Para iniciar y darnos una idea de lo que consta el proyecto ._
 _Conocer la versión de node & npm ingresa el siguiente comando en la consola de Windows_
 ```
 npm -version
-node -version
+node --version
 ```
 _Instalar el generador de express Generator de manera global no solo para éste proyecto_
 ```
