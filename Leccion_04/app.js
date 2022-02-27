@@ -3,19 +3,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var connMongo = require ('./database/conexionMongo');
+const mongo = require('./config/conexionMongo');
+const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+mongo();
+//Manejo session
+app.set('trust proxy', 1);
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
-//invocar Mongo
-connMongo();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// view engine setup 
+const hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
 app.set('view engine', 'hbs');
+app.set("views", __dirname + "/views");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,12 +1,29 @@
-const { Router } = require('express');
 var express = require('express');
 var router = express.Router();
-var userController = require('../controllers/userController');
+var controller = require('../controllers/userController');
 
-/* Obtener pantalla  */
-router.get('/', userController.user_login);
-router.get('/home', userController.user_home);
-router.post('/verify', userController.user_verify);
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  let data = {
+    title: 'Ingresar al Sistema',
+    layout:false
+  }
 
+  res.render('login', data);
+});
+
+router.get('/home', controller.user_home);
+router.post('/verify', controller.user_login_verify);
+router.get('/logout', controller.user_logout);
+router.post('/addUser', controller.user_register); 
+
+router.get('/register', function(req, res, next){
+  let data = {
+      title: 'Registrar Usuario',
+      layout:false
+    }
+
+  res.render('register', data);
+});
 
 module.exports = router;
