@@ -136,8 +136,8 @@ http://localhost:3000/addUser
 ```
 
 ## Definiendo los controladores de las respectivas rutas
-_ Crea un nuevo archivo llamado userController.js dentro de la carpeta Controllers_
-_ Agregar las funciones que manejaran cada petición en las rutas_
+_Crea un nuevo archivo llamado userController.js dentro de la carpeta Controllers_
+_Agregar las funciones que manejaran cada petición en las rutas_
  <pre>
  exports.user_login = function(req, res) {
     res.send("Ruta Login controlada por el controlador");    
@@ -170,7 +170,7 @@ _Agrega la referencia del controlador en archivo routes/index.js_
 var controller = require('../controllers/userController');
 ```
 
-_ Modifica el nombre de la función en las rutas_
+_Modifica el nombre de la función en las rutas_
 <pre>
 router.get('/', controller.user_login);
 router.get('/home', controller.user_home);
@@ -179,3 +179,326 @@ router.get('/register', controller.user_register);
 router.post('/verify', controller.user_verify);
 router.post('/addUser', controller.user_addUser); 
 </pre>
+
+# Definiendo estructura de carpetas para la vista
+_Para una mayor referencia de template <a href="https://handlebarsjs.com/guide/">HBS</a>_<p> 
+_Crear una hoja de estilo en la ruta public/stylesheets/login.css
+```
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #e7e6ee;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #a790e7, #9871f3, #4533e9, #0e0beb);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right,#a790e7, #9871f3, #4533e9, #0e0beb);
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+  }
+}
+```
+
+_Hacer modificaciones en archivo views/layout.hbs para agregar referencias hojas de estilo_
+```
+<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+<link rel='stylesheet' href='/stylesheets/login.css' />
+```
+
+_Agregar Script bootstrap al final del archivo layout_
+```
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+  </body>
+```
+
+_crear el archivo views/login.hbs_
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/login.css' />
+  </head>
+  <body>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <div class="card-body p-md-5 mx-md-4">
+
+                    <div class="text-center">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                        style="width: 185px;" alt="logo">
+                    </div>
+
+                    <form action="/verify" method="post">
+                      <p>Por favor ingresa con tu cuenta</p>
+                      {{#if message}}
+                        <p style="color:red">{{message}}</p>
+                      {{/if}}
+                      <div class="form-outline mb-4">
+                        <input type="text" id="username" name="username" class="form-control"
+                          placeholder="Usuario" />
+                        <label class="form-label" for="form2Example11">Usuario</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="password" id="password" name="password"
+                          class="form-control" />
+                        <label class="form-label" for="password">Contraseña</label>
+                      </div>
+
+                      <div class="text-right pt-1 mb-5 pb-1">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" onclick="submit();">Ingresar</button>
+                        <p><a class="text-muted" href="#!">¿Olvidaste Contraseña?</a> </p>
+                      </div>
+
+                      <div class="d-flex align-items-center
+                        justify-content-center pb-4">
+                        <a href="/register"><button type="button" class="btn btn-outline-danger">Registrate</button></a>
+                      </div>
+
+                    </form>
+
+                  </div>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center
+                  gradient-custom-2">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+_crear el archivo views/register.hbs_
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/login.css' />
+  </head>
+  <body>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <div class="card-body p-md-5 mx-md-4">
+
+                    <div class="text-center">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                        style="width: 185px;" alt="logo">
+                    </div>
+
+                    <form action="/addUser" method="post">
+                      <p>Registro de Usuario</p>
+                      {{#each messages}}
+                        <p style="color:red">{{this.msg}}</p>
+                      {{/each}}
+                      <div class="form-outline mb-4">
+                        <input type="text" id="username" name="username" class="form-control"
+                          placeholder="Usuario" />
+                        <label class="form-label" for="username">Usuario</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input type="text" id="email" name="email" class="form-control"
+                          placeholder="Email" />
+                        <label class="form-label" for="email">Correo Electrónico</label>
+                      </div>
+
+
+                      <div class="form-outline mb-4">
+                        <input type="password" id="password" name="password"
+                          class="form-control" />
+                        <label class="form-label" for="password">Contraseña</label>
+                      </div>
+
+                      <div class="text-center pt-1 mb-5 pb-1">
+
+                        <button class="btn btn-primary btn-block fa-lg
+                          gradient-custom-2 mb-3" type="button" onclick="submit();">Registrar</button>
+                        <p><a class="text-muted" href="/login">Ingresar</a></p>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center
+                  gradient-custom-2">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
+```
+
+_Modificar el archivo views/layout.hbs_
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/login.css' />
+  </head>
+  <body>
+    <div class="container">
+      <!-- header -->
+      <div class="row">
+        <div class="col">
+          {{> header}}
+        </div>
+      </div>
+
+      <!-- contenido login -->
+      <div class="row">
+        <div class="col">
+          {{{body}}}
+        </div>
+      </div>  
+
+      <!-- footer -->
+      <div class="row">
+        <div class="col">
+          {{> footer}}
+        </div>
+      </div>
+</div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
+
+```
+
+_Crear el archivo views/partials/header.hbs_
+```
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav  ml-auto" >
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Salir
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+```
+_Crear carpeta views/partials_
+_Crear el archivo views/partials/footer.hbs_
+```
+          <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">Footer</span>
+            </div>
+          </nav>
+```
+_configurar partials en archivo app.js_
+```
+const hbs = require('hbs');
+hbs.registerPartials(__dirname + '/views/partials', function (err) {});
+app.set('view engine', 'hbs');
+app.set("views", __dirname + "/views");
+```
+
+_Modificar rutas para login_
+```
+router.get('/', function(req, res, next) {
+  let data = {
+    title: 'Ingresar al Sistema',
+    layout:false //Indica que no se tome en cuenta layout
+  }
+
+  res.render('login', data);
+});
+```
+
+_Modificar rutas para login_
+```
+router.get('/register', function(req, res, next){
+  let data = {
+      title: 'Registrar Usuario',
+      layout:false
+    }
+
+  res.render('register', data);
+});
+
+```
+
+
+
