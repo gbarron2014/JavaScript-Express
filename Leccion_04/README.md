@@ -8,7 +8,7 @@ la conexión con MongoDB Atlas. A través de una serie de Vídeos se irá guiand
 * <a href="https://drive.google.com/file/d/1IvM0oHc5i3X3YrftKPePbFlpcXy2i_Eq/view?usp=sharing">Video 04</a> Definición de **rutas** en la aplicación
 * <a href="https://drive.google.com/file/d/1t9dyM-PUK5Ux2crtOpCmTp60pDPi0LgF/view?usp=sharing">Video 05</a> Definición de **controlador** asociadas a las **rutas**.
 * <a href="https://drive.google.com/file/d/1og70i12FBb6gnTNggd90UsdlHwMMpJiJ/view?usp=sharing">Video 06</a> Creación de vistas **Login** y **Registro**.
-* <a href="">Video 07</a>
+* <a href="https://drive.google.com/file/d/1nQFognFMm02cgusmWTBujvjbcMOGLxev/view?usp=sharing">Video 07</a> Implementación de logout y registro de usuario
 
 ## Comenzando 🚀
 
