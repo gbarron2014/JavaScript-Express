@@ -52,6 +52,7 @@ npm install express-session express-validator express-handlebars mongoose nodemo
 ```
 ## Configurando Base de datos MongoDB Atlas y módulo Mongoose
 _Acceder a MongoDB Atlas_
+_Ir a referencia de <a href="https://mongoosejs.com/docs/populate.html">Mongoose</a> _
 Ir a <a href="https://cloud.mongodb.com/">MongoDB</a>
 
 _Instalar la dependencia de módulo Mongoose para uso en Express_
@@ -92,5 +93,7 @@ _Una vez terminado exportar módulo_
 ```
 module.exports = mongoose.model('User', UserSchema);
 ```
-
+## Definiendo rutas
+_Referencia de tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes">Mozilla</a>_<p>
+_Referencia de documentación <a href="https://expressjs.com/es/api.html#router">Express</a>_<p>
 
