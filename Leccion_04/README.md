@@ -145,7 +145,7 @@ http://localhost:3000/addUser
 ```
 
 ## Definiendo funciones de controlador de las respectivas rutas
-_Crea un nuevo archivo llamado **userController.js** dentro de la carpeta Controllers_
+_Crea un nuevo archivo llamado userController.js dentro de la carpeta Controllers._
 _Agregar las funciones que manejaran cada petición en las rutas_
  <pre>
  exports.user_login = function(req, res) {
@@ -173,13 +173,13 @@ exports.user_addUser = function(req, res) {
 }
  </pre>
 
-### Modifica las rutas agregando el controlador que lo manejara
-_Agrega la referencia del controlador en archivo routes/index.js_
+### Modificar las rutas agregando el controlador que lo manejara
+_Agrega la referencia del controlador en archivo **routes/index.js**_
 ```
 var controller = require('../controllers/userController');
 ```
 
-_Modifica el nombre de la función en las rutas_
+_Cambiar la función anónima por nombre de función de controlador en las rutas._
 <pre>
 router.get('/', controller.user_login);
 router.get('/home', controller.user_home);
@@ -190,8 +190,8 @@ router.post('/addUser', controller.user_addUser);
 </pre>
 
 # Definiendo estructura de carpetas para la vista
-_Para una mayor referencia de template <a href="https://handlebarsjs.com/guide/">HBS</a>_<p> 
-_Crear una hoja de estilo en la ruta public/stylesheets/login.css
+_Para una mayor referencia de template <a href="https://handlebarsjs.com/guide/">HBS</a>_ 
+_Crear archivo **login.css** para hoja de estilo en la ruta **public/stylesheets/login.css**_
 ```
 .gradient-custom-2 {
   /* fallback for old browsers */
@@ -217,7 +217,7 @@ _Crear una hoja de estilo en la ruta public/stylesheets/login.css
 }
 ```
 
-_Hacer modificaciones en archivo views/layout.hbs para agregar referencias hojas de estilo_
+_Hacer modificaciones en archivo **views/layout.hbs** para agregar referencias de hojas de estilo._
 ```
 <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -227,7 +227,7 @@ _Hacer modificaciones en archivo views/layout.hbs para agregar referencias hojas
 <link rel='stylesheet' href='/stylesheets/login.css' />
 ```
 
-_Agregar Script bootstrap al final del archivo layout_
+_Agregar **Script** bootstrap al final del archivo **views/layout.hbs**_
 ```
 <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -236,7 +236,7 @@ _Agregar Script bootstrap al final del archivo layout_
   </body>
 ```
 
-_crear el archivo views/login.hbs_
+_Crear archivo **views/login.hbs** para captura de username y contraseña ()_
 ```
 <!DOCTYPE html>
 <html>
@@ -314,7 +314,7 @@ _crear el archivo views/login.hbs_
 </html>
 ```
 
-_crear el archivo views/register.hbs_
+_crear archivo **views/register.hbs** para captura de usuario: username, contraseña y correo electrónico._
 ```
 <!DOCTYPE html>
 <html>
@@ -395,7 +395,7 @@ _crear el archivo views/register.hbs_
 </html>
 ```
 
-_Modificar el archivo views/layout.hbs_
+_Modificar archivo **views/layout.hbs** para que tenga su propio layout_
 ```
 <!DOCTYPE html>
 <html>
@@ -440,8 +440,8 @@ _Modificar el archivo views/layout.hbs_
 </html>
 
 ```
-
-_Crear el archivo views/partials/header.hbs_
+_Crear carpeta **views/partials**_
+_Crear archivo **views/partials/header.hbs** para desplegarlo en pantalla Home de bienvenida y todas las demás pantallas (excepto Login y registro)._
 ```
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -467,8 +467,8 @@ _Crear el archivo views/partials/header.hbs_
   </div>
 </nav>
 ```
-_Crear carpeta views/partials_
-_Crear el archivo views/partials/footer.hbs_
+
+_Crear archivo **views/partials/footer.hbs** para el pie de página_
 ```
           <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
@@ -476,7 +476,7 @@ _Crear el archivo views/partials/footer.hbs_
             </div>
           </nav>
 ```
-_configurar partials en archivo app.js_
+_configurar **partials** en archivo **app.js**_
 ```
 const hbs = require('hbs');
 hbs.registerPartials(__dirname + '/views/partials', function (err) {});
@@ -484,37 +484,37 @@ app.set('view engine', 'hbs');
 app.set("views", __dirname + "/views");
 ```
 
-_Modificar rutas para login_
+_Modificar funcionalidad en rutas **login**_
 ```
 router.get('/', function(req, res, next) {
   let data = {
     title: 'Ingresar al Sistema',
-    layout:false //Indica que no se tome en cuenta layout
+    layout:false //Indica que no se tome en cuenta layout.hbs
   }
 
   res.render('login', data);
 });
 ```
 
-_Modificar rutas para login_
+_Modificar rutas para **registro**_
 ```
 router.get('/register', function(req, res, next){
   let data = {
       title: 'Registrar Usuario',
-      layout:false
+      layout:false 
     }
 
   res.render('register', data);
 });
 
 ```
-### Logica de negocio para Login
-_Agregar Express Validator para datos que llegan desde la vista_
+### Logica de negocio para Login en userController.js
+_Agregar referencia de **Express Validator** en datos que llegan desde la vista_
 ```
 const { body,validationResult } = require('express-validator');
 ```
 
-_Definir la función verify en el controlador pero primero validamos y sinitizar datos_
+_Definir la función verify en el controlador que obtiene los datos y verifica si hay vacíos_
 ```
 exports.user_login_verify = function(req, res) {
     let usuario = req.body.username;
@@ -522,14 +522,14 @@ exports.user_login_verify = function(req, res) {
 
     console.log('Usuario: ' + usuario + " Pass: " + pass);
     
-    if (usuario && pass) {
+    if (usuario && pass) {//Hay datos en parámetros enviados
     } else {
     }
 
 
 };
 ```
-_validar datos de la solicitud, modificar código_
+_Busca y si encuentra usuario en la Base de datos_
 ```
         User.find({'username': usuario, 'password':pass}, function(error, results){
             if (error) {
@@ -562,18 +562,16 @@ __Modificar código en caso de que haya errores
         res.render('/', data);
 ```
 
-_Modificar archivo de vista index.hbs para dar bienvenida_
+_Modificar archivo de vista **index.hbs** para dar bienvenida_
 ```
 <div class="container">
     <h1>Bienvenido {{message}}</h1>
 </div>
 ```
 
-_Agregar funcionalidad de Logout_
+_Agregar funcionalidad de **Logout**_
 ```
 exports.user_logout = function(req, res) {
-    req.session.destroy();
-
     let data = {
         title: 'Ingresar al Sistema',
         layout:false
