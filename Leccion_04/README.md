@@ -110,6 +110,10 @@ router.get('/register', function(req, res, next) {
   res.send('Ruta Registro de Usuario');
 });
 
+router.get('/logout', function(req, res, next) {
+  res.send('Ruta Logout ');
+});
+ 
 router.post('/verify', function(req, res, next) {
   res.send('Ruta Verifica si Usuario puede ingresar');
 });
@@ -123,11 +127,55 @@ _Prueba las URL´s con Postman_
 http://localhost:3000
 http://localhost:3000/home
 http://localhost:3000/register
+http://localhost:3000/logout
 
  ** Métodos POST **
 http://localhost:3000/verify
 http://localhost:3000/addUser
-
-
  
 ```
+
+## Definiendo los controladores de las respectivas rutas
+_ Crea un nuevo archivo llamado userController.js dentro de la carpeta Controllers_
+_ Agregar las funciones que manejaran cada petición en las rutas_
+ <pre>
+ exports.user_login = function(req, res) {
+    res.send("Ruta Login controlada por el controlador");    
+}
+
+exports.user_home = function(req, res) {
+    res.send("Ruta Home controlada por el controlador");    
+}
+
+exports.user_logout = function(req, res) {
+    res.send("Ruta Logout controlada por el controlador");    
+}
+
+exports.user_registro = function(req, res) {
+    res.send("Ruta Registro controlada por el controlador");    
+}
+
+exports.user_verify = function(req, res) {
+    res.send("Ruta verifica User controlada por el controlador");    
+}
+
+exports.user_addUser = function(req, res) {
+    res.send("Ruta Add User controlada por el controlador");    
+}
+ </pre>
+
+### Modifica las rutas agregando el controlador que lo manejara
+_Agrega la referencia del controlador en archivo routes/index.js_
+```
+var controller = require('../controllers/userController');
+```
+
+_ Modifica el nombre de la función en las rutas_
+<pre>
+router.get('/', controller.user_login);
+router.get('/home', controller.user_home);
+router.get('/logout', controller.user_logout);
+router.get('/register', controller.user_register);
+router.post('/verify', controller.user_verify);
+router.post('/addUser', controller.user_addUser); 
+</pre>
