@@ -118,3 +118,16 @@ router.post('/addUser', function(req, res, next) {
   res.send('Agrega Usuario a Mongo');
 });
 ```
+_Prueba las URL´s con Postman_
+```
+http://localhost:3000
+http://localhost:3000/home
+http://localhost:3000/register
+
+ ** Métodos POST **
+http://localhost:3000/verify
+http://localhost:3000/addUser
+
+
+ 
+```
