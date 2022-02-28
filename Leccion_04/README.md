@@ -499,6 +499,77 @@ router.get('/register', function(req, res, next){
 });
 
 ```
+### Logica de negocio para Login
+_Agregar Express Validator para datos que llegan desde la vista_
+```
+const { body,validationResult } = require('express-validator');
+```
+
+_Definir la función verify en el controlador pero primero validamos y sinitizar datos_
+```
+exports.user_login_verify = function(req, res) {
+    let usuario = req.body.username;
+    let pass = req.body.password;
+
+    console.log('Usuario: ' + usuario + " Pass: " + pass);
+    
+    if (usuario && pass) {
+    } else {
+    }
 
 
+};
+```
+_validar datos de la solicitud, modificar código_
+```
+        User.find({'username': usuario, 'password':pass}, function(error, results){
+            if (error) {
+                let data = {
+                    title: 'Ingresar al Sistema',
+                    message: 'Hubo un error contacte a soporte',
+                    layout:false
+                }
+                res.render('login', data);                
+            }
 
+            if (results.length > 0) {
+                res.render('index', {title:'Bienvenido'});
+            } else {
+                let data = {
+                    title: 'Ingresar al Sistema',
+                    message: 'Usuario o contraseña incorrecto',
+                    layout:false
+                }
+                res.render('login', data);   
+            }
+```
+__Modificar código en caso de que haya errores
+```
+        let data = {
+            title: 'Ingresar al Sistema',
+            message: 'Usuario o Contraseña vacío',
+            layout:false
+        }
+        res.render('/', data);
+```
+
+_Modificar archivo de vista index.hbs para dar bienvenida_
+```
+<div class="container">
+    <h1>Bienvenido {{message}}</h1>
+</div>
+```
+
+_Agregar funcionalidad de Logout_
+```
+exports.user_logout = function(req, res) {
+    req.session.destroy();
+
+    let data = {
+        title: 'Ingresar al Sistema',
+        layout:false
+    }
+    res.render('login', data);   
+
+};
+```
