@@ -1,22 +1,28 @@
 # Login and registro con Express and MongoDb Atlas
 
 _El presente proyecto tiene como objetivo hacer uso del framework <b>Express</b> utilizando el patrón <b>MVC</b> (Modelo Vista Controlador) emplearemos
-la conexión con MongoDB Atlas.
-_
+la conexión con MongoDB Atlas. A través de una serie de Vídeos se irá guiando en el desarrollo de la aplicación._
+* <a href="">Video 01</a> 
+* <a href="https://drive.google.com/file/d/1iAwPTWXNoc-GErwhkiU_sO1xayTAgiyh/view?usp=sharing">Video 02</a> Instalación y configuración del proyecto con **Express Generator**.
+* <a href="https://drive.google.com/file/d/1UsbBcEkc-_n8XZyVki8TwVztdIXf0IDm/view?usp=sharing">Video 03</a> Creación de **base de datos** y collección **users** en **MongoDB**, configuración de conexión de MongoDB en la aplicación y definición de esquema **user**.
+* <a href="https://drive.google.com/file/d/1IvM0oHc5i3X3YrftKPePbFlpcXy2i_Eq/view?usp=sharing">Video 04</a> Definición de **rutas** en la aplicación
+* <a href="https://drive.google.com/file/d/1t9dyM-PUK5Ux2crtOpCmTp60pDPi0LgF/view?usp=sharing">Video 05</a> Definición de **controlador** asociadas a las **rutas**.
+* <a href="https://drive.google.com/file/d/1og70i12FBb6gnTNggd90UsdlHwMMpJiJ/view?usp=sharing">Video 06</a> Creación de vistas **Login** y **Registro**.
+* <a href="">Video 07</a>
 
 ## Comenzando 🚀
 
 _Para iniciar y darnos una idea de lo que consta el proyecto ._
 
-**Pasos para instala la aplicación** para conocer como desplegar el proyecto.
+**Pasos para instalar la aplicación** y conocer como ejecutar el proyecto.
   * Descarga la aplicación de ejemplo <b><a href="https://github.com/gbarron2014/JavaScript-Express/archive/refs/heads/main.zip">Descargala AQUI</a></b>
   * Descomprimir el archivo recien creado
-  * Navegar hasta la carpeta JavaScript & Express
+  * Navegar hasta la carpeta JavaScript & Express y ejecutar los siguientes comandos
   ```
     cd JavaScript-Express-main
     cd Leccion_04
   ```
-  * Instalar los módulos con la siguiente instrucción.
+  * Instalar los módulos requeridos para la aplicación y definidos en archivo package.json con la siguiente instrucción.
   ```
     npm install
   ```
@@ -30,19 +36,21 @@ _Para iniciar y darnos una idea de lo que consta el proyecto ._
 
 * Instalar <b><a href="https://nodejs.org/es/download/">NodeJS</a></b>
 * Instalar <b><a href="https://code.visualstudio.com/download">Visual Studio Code </a></b>
+* Instalar <b><a href="https://www.postman.com/downloads/">Postman</a></b> para escritorio.
 
-## Creación desde el Scratch Aplicación 🔧
-_Conocer la versión de node & npm ingresa el siguiente comando en la consola de Windows_
+# Creación desde el Scratch Aplicación de Express 🔧
+_Abrir consola de Windows **Windows + R**, ingresar comando **cmd** y dar **Enter**_
+_Primeramente, debemos conocer la versión actualmemnte instaladas de **node** & **npm** ingresa el siguiente comando en la consola _
 ```
 npm -version
 node --version
 ```
-_Instalar el generador de express Generator de manera global no solo para éste proyecto_
+_Instalar el generador de **Express Generator** de manera global no solo para éste proyecto sino para todos los que se ejecuten en la máquina_
 ```
 npm install express-generator -g
 ```
-## Generación y configuración de proyecto en Express
-_Crear el proyecto con el framework express_
+## Vide 02 Generación y configuración de proyecto en Express
+_Crear el proyecto con el framework **express**, tome en cuenta el nombre del proyecto y la plantilla con HandleBars_
 ```
 express ejemplo --view=hbs
 ```
@@ -50,16 +58,15 @@ _Instalar todos los módulos requeridos con el siguiente comando_
 ```
 npm install express-session express-validator express-handlebars mongoose nodemon --save
 ```
-## Configurando Base de datos MongoDB Atlas y módulo Mongoose
+## Video 03 Configurando Base de datos MongoDB Atlas y módulo Mongoose
 _Acceder a MongoDB Atlas_
-_Ir a referencia de <a href="https://mongoosejs.com/docs/populate.html">Mongoose</a> _
-Ir a <a href="https://cloud.mongodb.com/">MongoDB</a>
-
-_Instalar la dependencia de módulo Mongoose para uso en Express_
+_Ir a la referencia de <a href="https://mongoosejs.com/docs/populate.html">Mongoose</a> para consulta más precisa. _
+_Ir a la referencia<a href="https://cloud.mongodb.com/">MongoDB</a> para dar de alta **base de datos** y **collección**._
+_Instalar la dependencia de módulo Mongoose para uso en Express (Claro está que la hicimos al inicio)_
 ```
 npm install mongoose --save
 ```
-_Configurar conexión a base de datos MongoDB Atlas, solo es necesario agregar la URL_
+_Configurar conexión a base de datos con MongoDB Atlas en Express, solo es necesario agregar la URL que indica MongoDB en la nube_
 <pre>
     var mongoose = require('mongoose');
     var mongoDB = ''; //Agrega URL AQUI
@@ -68,28 +75,28 @@ _Configurar conexión a base de datos MongoDB Atlas, solo es necesario agregar l
     db.on('error', console.error.bind(console, 'Error de Conexion a MongoDB'));
 </pre>
 
-_Abrir archivo app.js y agregar referencia donde se encuentra funcion_
+_Abrir archivo **app.js** y agregar referencia donde se encuentra funcion de conexión_
 ```
 const mongo = require('./config/conexionMongo');
 ```
 _Invocar la conexión a MongoDB_
 ```
-mongo();
+mongo(); //Invocación a función de conexión.
 ```
-### Definición de Esquema Usuario
-_Crear archivo user.js en carpeta <b>models</b>_
-_Agregar referencia de <b>Mongoose y Schema </a>_
+### Definición de esquema Usuario
+_Crear archivo **user.js** en carpeta <b>models</b>_
+_Agregar primeramente referencia de clases<b>Mongoose y Schema </a>_
 ```
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 ```
-_Definir esquema User_
+_Definir esquema **User** vamos a agregar campos como **username, password y correo electrónico**_
 ```
 var UserSchema = new Schema({
     //Define los atributos username, password e email
 });
 ```
-_Una vez terminado exportar módulo_
+_Una vez terminado de definir el esquema al final exportar módulo_
 ```
 module.exports = mongoose.model('User', UserSchema);
 ```
@@ -97,7 +104,12 @@ module.exports = mongoose.model('User', UserSchema);
 _Referencia de tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes">Mozilla</a>_<p>
 _Referencia de documentación <a href="https://expressjs.com/es/api.html#router">Express</a>_<p>
 
-_Definiendo las rutas para la funcionalidad de Ingreso y registro de usuario_
+_Definir las rutas para las funcionalidades:_
+* Mostrar pantalla de Login & Registro de Usuario.
+* Mostrar pantalla de bienvenida una vez ingresado con las credenciales.
+* Salir de la aplicación con Logout.
+* Verificar si el usuario existe en el base de datos.
+* Agregar un nuevo usuario a la base de datos.
 ```
 router.get('/', function(req, res, next) {
   res.send('Ruta login');
@@ -122,21 +134,18 @@ router.post('/addUser', function(req, res, next) {
   res.send('Agrega Usuario a Mongo');
 });
 ```
-_Prueba las URL´s con Postman_
+_Prueba las URL´s con Postman y verifica que los mensajes sean correctos_
 ```
 http://localhost:3000
 http://localhost:3000/home
 http://localhost:3000/register
 http://localhost:3000/logout
-
- ** Métodos POST **
 http://localhost:3000/verify
 http://localhost:3000/addUser
- 
 ```
 
-## Definiendo los controladores de las respectivas rutas
-_Crea un nuevo archivo llamado userController.js dentro de la carpeta Controllers_
+## Definiendo funciones de controlador de las respectivas rutas
+_Crea un nuevo archivo llamado **userController.js** dentro de la carpeta Controllers_
 _Agregar las funciones que manejaran cada petición en las rutas_
  <pre>
  exports.user_login = function(req, res) {
