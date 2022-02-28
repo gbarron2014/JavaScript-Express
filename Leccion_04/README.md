@@ -97,3 +97,24 @@ module.exports = mongoose.model('User', UserSchema);
 _Referencia de tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes">Mozilla</a>_<p>
 _Referencia de documentación <a href="https://expressjs.com/es/api.html#router">Express</a>_<p>
 
+_Definiendo las rutas para la funcionalidad de Ingreso y registro de usuario_
+```
+router.get('/', function(req, res, next) {
+  res.send('Ruta login');
+});
+router.get('/home', function(req, res, next) {
+  res.send('Ruta de Home');
+});
+
+router.get('/register', function(req, res, next) {
+  res.send('Ruta Registro de Usuario');
+});
+
+router.post('/verify', function(req, res, next) {
+  res.send('Ruta Verifica si Usuario puede ingresar');
+});
+
+router.post('/addUser', function(req, res, next) {
+  res.send('Agrega Usuario a Mongo');
+});
+```
