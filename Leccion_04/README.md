@@ -580,3 +580,87 @@ exports.user_logout = function(req, res) {
 
 };
 ```
+
+### Creando la funcionalidad de Logout
+_Modificar el método user de logout_
+```
+exports.user_logout = function(req, res) {
+    let data = {
+        title: 'Ingresar al Sistema',
+        layout:false
+    }
+    res.render('login', data);   
+
+};
+```
+
+
+### Implementar funcionalidad registro
+_Modificar funcionalidad de registro en controlador_
+```
+exports.user_addUser = [];
+```
+_Agrear el siguiente código para modificar extraer datos y sanitzarlos_
+```
+    body('username','Usuario es requerido').trim().isLength({min:8, max:15}).escape(),
+    body('email','Email es requerido').trim().isEmail().escape(), 
+    body('password','Contraseña es requerida').trim().isLength({min:8, max:15}).escape(),
+
+    (req, res, next) => {
+    }
+```
+_agregar referencia a Express validator_
+```
+const { body,validationResult } = require('express-validator');
+```
+_Verificar que no haya errores_
+```
+(req, res, next) => {
+        console.log('Ingresando a la validación');
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+        } else {
+        }
+```
+_Implementar cuando hay errores_
+```
+        if (!errors.isEmpty()) {
+            let data = {
+                title: 'Registro de Usuario',
+                messages: errors.array()
+            };
+            res.render('register', data);
+            return;
+```
+_Implementar registro en la base de datos_
+```
+        } else {
+            console.log('Registrando Usuario');
+            let user = new User({ //Creando objeto User
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email
+            });
+
+            user.save(function(error){
+                if (error) { return next(error); }
+
+                let data= {title: 'Ingresar Sistema', message:'Bienvenido ' + req.body.username}
+                res.render('index', data);
+            });
+```
+
+_verificar en archivo routes/index.js el método_
+```
+router.post('/addUser', controller.user_addUser); 
+```
+
+Agregar código Handlebars para desplegar mensajes_
+```
+                    <form action="/addUser" method="post">
+                      <p>Registro de Usuario</p>
+                      {{#each messages}}
+                        <p style="color:red">{{this.msg}}</p>
+                      {{/each}}
+```
