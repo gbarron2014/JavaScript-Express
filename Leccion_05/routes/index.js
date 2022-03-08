@@ -1,29 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/userController');
+const authMiddleware = require('../middleware/authentication');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  let data = {
-    title: 'Ingresar al Sistema',
-    layout:false
-  }
-
-  res.render('login', data);
-});
-
-router.get('/home', controller.user_home);
+/* No es necesario verificar */
+router.get('/', controller.user_login);
+router.get('/formRegister', controller.register_show);
+router.post('/addUser', controller.user_register);
 router.post('/verify', controller.user_login_verify);
-router.get('/logout', controller.user_logout);
-router.post('/addUser', controller.user_register); 
 
-router.get('/register', function(req, res, next){
-  let data = {
-      title: 'Registrar Usuario',
-      layout:false
-    }
+//Protege páginas 
+router.get('/home', authMiddleware, controller.user_home);
+router.get('/logout', authMiddleware, controller.user_logout);
 
-  res.render('register', data);
-});
+
 
 module.exports = router;
