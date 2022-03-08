@@ -1,11 +1,13 @@
-//Configurar conexión Mongoose
+
 
 function connMongo() {
+    require('dotenv').config();
     var mongoose = require('mongoose');
-    var mongoDB = 'mongodb+srv://gds05:gds05@cluster0.jnmbt.mongodb.net/login?retryWrites=true&w=majority';
+    var mongoDB = process.env.DB_URL;
+    console.log(process.env.DB_URL);
     mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Error de Conexion a MongoDB'));
 }
 
-module.exports = connMongo;
+module.exports = connMongo

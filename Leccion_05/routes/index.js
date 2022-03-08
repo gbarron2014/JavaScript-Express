@@ -1,27 +1,29 @@
-const { Router } = require('express');
 var express = require('express');
-const { cookie } = require('express/lib/response');
 var router = express.Router();
-var userController = require('../controllers/userController');
+var controller = require('../controllers/userController');
 
-/* Obtener pantalla  */
-router.get('/', userController.user_login);
-router.get('/home', userController.user_home);
-router.post('/verify', userController.user_verify);
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  let data = {
+    title: 'Ingresar al Sistema',
+    layout:false
+  }
 
-//Ruta de prueba de Cookie
-router.get('/cookie',(req, res) => {
-    console.log('Cookies: ', req.cookies);
-    console.log('Signed Cookies: ', req.signedCookies);
-
-    for (cookie in req.cookies) {
-        console.log("Galleta = " + cookie);
-
-    }
-    
-
-    res.cookie('color' , 'Mi color favorito es Azul', { maxAge: 900000, httpOnly: true, signed:true});
-    res.send('Cookie is set');
-    
+  res.render('login', data);
 });
+
+router.get('/home', controller.user_home);
+router.post('/verify', controller.user_login_verify);
+router.get('/logout', controller.user_logout);
+router.post('/addUser', controller.user_register); 
+
+router.get('/register', function(req, res, next){
+  let data = {
+      title: 'Registrar Usuario',
+      layout:false
+    }
+
+  res.render('register', data);
+});
+
 module.exports = router;
