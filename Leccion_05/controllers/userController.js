@@ -1,12 +1,17 @@
 var User = require('../models/user');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+var Recaptcha = require('express-recaptcha').RecaptchaV3
+require('dotenv').config();
+
+var recaptcha = new Recaptcha(process.env.KEY_SITE, process.env.KEY_SECRET, { callback: 'cb' })
 
 
 exports.user_login = function(req, res) {
     let data = {
         title: 'Ingresar al Sistema',
-        layout: false
+        layout: false,
+        captcha: res.recaptcha
     }
 
     res.render('login', data);

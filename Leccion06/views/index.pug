@@ -1,0 +1,28 @@
+extends layout 
+
+block content
+    div(class='container')
+      div(class='row')
+        div(class='col')
+          a.ov-btn-grow-spin(href= '/administrar/menu_libro')
+            img(src='../images/libro2.png' alt='Libros')
+            br
+            | Libros
+          label.form-label(for='servicio') Servicio de Cómputo
+          input(type='radio', name='servicio', value='Servicio Cómputo', checked=true)
+        div(class='col')
+          label.form-label(for='servicio') Préstamo Externo
+          input(type='radio', name='servicio', value='Préstamo Externo')
+        div(class='col')
+          label.form-label(for='servicio') Préstamo Interno
+          input(type='radio', name='servicio', value='Préstamo Interno')
+        div(class='col')
+          label.form-label(for='servicio') Préstamo interbibliotecario
+          input(type='radio', name='servicio', value='Préstamo Interbibliotecario')
+      div(class='row')
+          div(class='col-40' id='result')
+              Result Here
+          div(class='col-40' id='reader' style='width: 600px;')
+    script(type='text/javascript').
+      const html5QrcodeScanner = new Html5QrcodeScanner('reader', { fps: 10, qrbox: 250 });
+      html5QrcodeScanner.render(onScanSuccess, onScanError);
