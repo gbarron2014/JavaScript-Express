@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+/*
+ * Esquema para registro de rol de usuario a Biblioteca
+ */
 var RegistroSchema = new Schema({
     Qr: { type: Number },
     Roles: { type: String, require: true },
@@ -10,6 +13,5 @@ var RegistroSchema = new Schema({
     Fecha_Registro: { type: Date, default: Date.now },
     Servicio: { type: String, default: 'Equipo Computo' }
 });
-
 
 module.exports = mongoose.model('registros', RegistroSchema);

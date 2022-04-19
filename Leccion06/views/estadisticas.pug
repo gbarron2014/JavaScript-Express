@@ -10,7 +10,7 @@ block content
               <table border="0" cellspacing="5" cellpadding="5">
                 <tbody>
                   <tr>
-                    <td>Fecha Minima:</td>
+                    <td>Fecha Mínima:</td>
                     <td><input type='text'  id='min' name='min'></td>
                   </tr>
                   <tr>
@@ -34,15 +34,13 @@ block content
                       th(scope='col') Fecha de Registro
                       th(scope='col') Tipo de Servicio
                   tbody
-                    -var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-                    -var dias_semana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
                     each registro in registros 
                       tr 
                         th #{registro.Roles } 
                         td #{registro.Genero}
                         td #{registro.Turno}
                         td #{registro.Carrera_Tecnica}
-                        td #{registro.Fecha_Registro.getDate() + '/' + (registro.Fecha_Registro.getMonth()+1) + '/' + registro.Fecha_Registro.getUTCFullYear()}
+                        td #{registro.Fecha_Registro.getUTCFullYear() + '/' + (registro.Fecha_Registro.getMonth()+1) +  '/' + registro.Fecha_Registro.getDate()}
                         td #{registro.Servicio}  
     script(src="/js/sweet_carga.js")
     <!-- Datatables -->
